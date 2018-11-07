@@ -32,7 +32,11 @@ O usuário deve acessar o diretório que deseja armazenar a aplicação e, em se
 2. Instalação de dependências para o aplicativo
 <pre>npm install </pre>
 
-3. Inicialização da aplicação
+3. Instalação da dependência referente ao componente DebounceInput
+
+<pre>npm install react-debounce-input</pre>
+
+4. Inicialização da aplicação
 <pre>npm start </pre> 
  ou 
 <pre>yarn start </pre> 
