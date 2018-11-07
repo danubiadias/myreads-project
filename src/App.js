@@ -1,19 +1,19 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 
 import * as BooksAPI from './utils/BooksAPI'
 
-import './App.css'
-
 import MyReads from './components/MyReads.js'
 import SearchBooks from './components/SearchBooks.js'
 
+import './App.css'
 
-class BooksApp extends React.Component {
+class BooksApp extends Component {
 
   state = {
     books: []
   }
+
 
   componentDidMount() {
     BooksAPI.getAll()
@@ -26,17 +26,21 @@ class BooksApp extends React.Component {
 
   updateShelf = (changedBook, destinationShelf) => {
 
-    BooksAPI.update(changedBook, destinationShelf).then(response => {
-      
-      changedBook.shelf = destinationShelf;
-      
+    const updatedBook = {
+      ...changedBook,
+      shelf: destinationShelf
+    }
+
+    BooksAPI.update(updatedBook, destinationShelf).then(response => {
+
       this.setState(prevState => ({
         books: prevState.books
-          .filter(book => book.id !== changedBook.id)
-          .concat(changedBook)
+          .filter(book => book.id !== updatedBook.id)
+          .concat(updatedBook)
       }));
 
       alert("Book moved successfully!")
+      
     });
   };
 
@@ -44,7 +48,7 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route path="/" exact render={() => (
-          <MyReads books={this.state.books} updateShelf={this.updateShelf} />
+            <MyReads books={this.state.books} updateShelf={this.updateShelf} />
         )}
         />
         <Route path="/search" render={({ history }) => (
