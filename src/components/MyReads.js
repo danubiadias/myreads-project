@@ -1,32 +1,30 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 
 import BooksList from './BooksList';
 
-class MyReads extends Component {
+const MyReads = (props) => {
 
-    static propTypes = {
-        books: PropTypes.array.isRequired,
-        updateShelf: PropTypes.func.isRequired
-    }
+    const { books, updateShelf } = props;
 
-    render() {
-
-        const {books, updateShelf} = this.props;
-
-        return (
-            <div className="list-books">
-                <div className="list-books-title">
-                    <h1>MyReads</h1>
-                </div>
-                <BooksList books={books} updateShelf={updateShelf}/>
-                <div className="open-search">
-                    <Link to="/search">Add a book</Link>
-                </div>
+    return (
+        <div className="list-books">
+            <div className="list-books-title">
+                <h1>MyReads</h1>
             </div>
-            
-        )
-    }
+            <BooksList books={books} updateShelf={updateShelf} />
+            <div className="open-search">
+                <Link to="/search">Add a book</Link>
+            </div>
+        </div>
+
+    )
 }
+
+MyReads.propTypes = {
+    books: PropTypes.array.isRequired,
+    updateShelf: PropTypes.func.isRequired
+}
+
 export default MyReads
